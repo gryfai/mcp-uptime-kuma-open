@@ -4,11 +4,11 @@ from services import (
 )
 
 
-UPTIME_KUMA_URL=getenv("UPTIME_KUMA_URL", "http://localhost:3001/")
+UPTIME_KUMA_URL=getenv("UPTIME_KUMA_URL", "http://localhost:3001")
 UPTIME_KUMA_USERNAME=getenv("UPTIME_KUMA_USERNAME", None)
 UPTIME_KUMA_PASSWORD=getenv("UPTIME_KUMA_PASSWORD", None)
 
-serv = KumaService("http://localhost:3001",UPTIME_KUMA_USERNAME,UPTIME_KUMA_PASSWORD)
+serv = KumaService(UPTIME_KUMA_URL,UPTIME_KUMA_USERNAME,UPTIME_KUMA_PASSWORD)
 
 
 free_mcp = FastMCP("Free Uptime Kuma MCP server")
