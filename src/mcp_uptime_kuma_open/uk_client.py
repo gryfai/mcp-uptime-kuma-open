@@ -8,17 +8,28 @@ class KumaService:
             username,
             password
     ):
-        self.password=password,
-        self.username=username,
-        self.url=url,
-        self._api = None
+        self._password=password
+        self._username=username
+        self._url=url
+        self.api = None
 
     def __enter__(self):
-        self._api=UptimeKumaApi(self.url)
-        self._api.login(self.username,self.password)
+        try:
+            self.api=UptimeKumaApi(url=self._url)
+            self.api.login(
+                username=self._username,
+                password=self._password
+            )
+            return self.api
+
+        except Exception as e:
+            if self.api:
+                self.api.disconnect()
+            raise e
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if self._api:
-            self._api.disconnect()
+        if self.api:
+            self.api.disconnect()
+        return False
 
 

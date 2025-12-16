@@ -1,9 +1,3 @@
-from os import getenv
-from dotenv import load_dotenv
+from fastmcp import FastMCP
 
-load_dotenv()
-
-UPTIME_KUMA_URL=getenv("UPTIME_KUMA_URL")
-UPTIME_KUMA_USERNAME=getenv("UPTIME_KUMA_USERNAME")
-UPTIME_KUMA_PASSWORD=getenv("UPTIME_KUMA_PASSWORD")
 
