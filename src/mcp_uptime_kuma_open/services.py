@@ -62,3 +62,75 @@ def get_all_heartbeats() -> dict:
             return api.get_heartbeats()
     except Exception as e:
         raise ToolError(e)
+
+
+def get_all_nofitications() -> list[dict]:
+    """
+    :return: List with all notifications as dictionaries
+    """
+    try:
+        with kuma_service as api:
+            return api.get_notifications()
+    except Exception as e:
+        raise ToolError(e)
+
+def get_specific_notification(id: int) -> dict:
+    """
+    Gets a specific notification from Uptime Kuma
+    :param id: Notification id
+    :return: Notification as dictionary
+    """
+    try:
+        with kuma_service as api:
+            return api.get_notification(id)
+    except Exception as e:
+        raise ToolError(e)
+
+def get_all_proxies() -> list[dict]:
+    """
+    Get all proxies from Uptime Kuma
+    :return: All proxies as lists of dictionaries
+    """
+    try:
+        with kuma_service as api:
+            return api.get_proxies()
+    except Exception as e:
+        raise ToolError(e)
+
+
+def get_specific_proxy(id: int) -> dict:
+    """
+    Gets specific proxy per proxy id (integer).
+    :param id: Proxy Id as integer
+    :return: Proxy as dictionary
+    """
+    try:
+        with kuma_service as api:
+            return api.get_proxy(id)
+    except Exception as e:
+        raise ToolError(e)
+
+def get_all_status_pages() -> list[dict]:
+    """
+    Gets all status pages for consumption.
+    :return: All status pages as list of dictionaries
+    """
+    try:
+        with kuma_service as api:
+            return api.get_status_pages()
+    except Exception as e:
+        raise ToolError(e)
+
+
+def get_specific_status_page(slug: str) -> dict:
+    """
+    Gets a specific status page from Uptime Kuma
+    :param id: Id of the status page
+    :return:
+    """
+    try:
+        with kuma_service as api:
+            return api.get_status_page(slug)
+    except Exception as e:
+        raise ToolError(e)
+

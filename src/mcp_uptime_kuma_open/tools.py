@@ -3,7 +3,11 @@ from services import (
     get_all_monitors,
     get_specific_monitor,
     get_specific_monitor_beats,
-    get_all_heartbeats
+    get_all_heartbeats,
+    get_all_proxies,
+    get_specific_proxy,
+    get_all_status_pages,
+    get_specific_status_page
 )
 
 
@@ -60,3 +64,33 @@ def register_tools(free_mcp: FastMCP):
         :return: Dictionary with Beats
         """
         return get_specific_monitor_beats(id, hours)
+
+    @free_mcp.tool()
+    def get_all_proxies() -> list[dict]:
+        """
+        This tool returns all Uptime Kuma registered proxies. When a user asks to see
+        all the proxies available, this is the tool to use. This can also be used if the user
+        wants to read all but also want to filter or do operations on proxies - non-destructive ones!
+        :return:
+        """
+        return get_all_proxies()
+
+    @free_mcp.tool()
+    def get_all_available_status_pages() -> list[dict]:
+        """
+        Gets all available status pages from Uptime Kuma. This tool is used when a user
+        asks to see all status pages. It can also be used to fetch all status pages and then do
+        operations or filtration - non-destructive ones.
+        :return: All available status pages as a list of dictionaries
+        """
+        return get_all_status_pages()
+
+    @free_mcp.tool()
+    def get_specific_status_page_per_slug(slug: str) -> dict:
+        """
+        Gets a specific status page per provided slug. If a user wants to see a specific status page
+        and specifieds the required slug then this is the tool to use for that.
+        :param slug: String that acts like an id
+        :return: A Status page as a dictionary
+        """
+        return get_specific_status_page(slug)
