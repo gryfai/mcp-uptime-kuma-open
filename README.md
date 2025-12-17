@@ -4,7 +4,8 @@ This is the open version of our Uptime Kuma MCP server.
 It is open to for personal use and small companies
 can freely use this internally for their operations. See our license for more information.
 This version is released under the BSL license. We do provide a hosted solution with more
-functionality baked in to the closed source version.
+functionality baked in to the closed source version. If you want the more advanced version,
+please contact us on hello (at) gryfai.com
 
 # The open version
 This version is exposing a limited but useful set of tools to interact with
@@ -32,6 +33,8 @@ It includes capabilities such as
 - Docker functionality
 - API-key management
 - Proxy management
+
+Just contact us at: hello (at) gryfai.com
 
 # Installation and usage.
 TBA
