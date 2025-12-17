@@ -11,7 +11,7 @@ UPTIME_KUMA_PASSWORD=getenv("UPTIME_KUMA_PASSWORD", None)
 
 kuma_service = KumaService(UPTIME_KUMA_URL,UPTIME_KUMA_USERNAME, UPTIME_KUMA_PASSWORD)
 
-async def get_all_monitors() -> list[dict]:
+def get_all_monitors() -> list[dict]:
     """
     Gets a list of Uptime Kuma Monitors.
     :return: List of Uptime Kuma Monitors
@@ -22,7 +22,7 @@ async def get_all_monitors() -> list[dict]:
     except Exception as e:
             raise ToolError(e)
 
-async def get_specific_monitor(id_: int) -> dict:
+def get_specific_monitor(id_: int) -> dict:
     """
     Gets a specific Uptime Kuma Monitor by Id. Id needs to be integer.
     Use the Id (integer) to interact with a specific monitor. Whenever the user
