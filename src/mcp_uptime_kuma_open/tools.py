@@ -4,10 +4,23 @@ from services import (
     get_specific_monitor,
     get_specific_monitor_beats,
     get_all_heartbeats,
-    get_all_proxies,
+    get_all_proxies as get_all_proxies_service,
     get_specific_proxy,
     get_all_status_pages,
-    get_specific_status_page
+    get_specific_status_page,
+    get_all_notifications,
+    get_specific_notification,
+    get_average_ping,
+    get_server_info,
+    get_general_uptime,
+    get_all_tags,
+    get_specific_tag,
+    get_current_settings,
+    get_all_maintenances,
+,
+    get_down_monitors_service,
+    get_monitor_health_summary_service,
+    get_monitors_by_tag_service
 )
 
 
@@ -47,8 +60,6 @@ def register_tools(free_mcp: FastMCP):
         """
         return get_all_heartbeats()
 
-
-
     @free_mcp.tool()
     def get_monitor_beats_per_id(
             id: int,
@@ -73,7 +84,17 @@ def register_tools(free_mcp: FastMCP):
         wants to read all but also want to filter or do operations on proxies - non-destructive ones!
         :return:
         """
-        return get_all_proxies()
+        return get_all_proxies_service()
+
+    @free_mcp.tool()
+    def get_specific_proxy_by_id(id: int) -> dict:
+        """
+        Gets a specific proxy if a proxy id as integer is provided. This tool is used
+        when a user wants to inspect a single proxy and shares the integer id.
+        :param id: Proxy id
+        :return: Proxy as dictionary
+        """
+        return get_specific_proxy(id)
 
     @free_mcp.tool()
     def get_all_available_status_pages() -> list[dict]:
@@ -94,3 +115,112 @@ def register_tools(free_mcp: FastMCP):
         :return: A Status page as a dictionary
         """
         return get_specific_status_page(slug)
+
+    @free_mcp.tool()
+    def get_all_uptime_kuma_notifications() -> list[dict]:
+        """
+        Gets all notifications from Uptime Kuma. When the user asks to review or list all
+        notifications, this tool is used to return everything available.
+        :return: List of notifications as dictionaries
+        """
+        return get_all_notifications()
+
+    @free_mcp.tool()
+    def get_specific_uptime_kuma_notification(id: int) -> dict:
+        """
+        Gets a specific notification if a notification id is provided as an integer.
+        This tool is used when the user asks for a particular notification and provides the id.
+        :param id: Notification id
+        :return: Notification as dictionary
+        """
+        return get_specific_notification(id)
+
+    @free_mcp.tool()
+    def get_average_ping_from_uptime_kuma() -> dict:
+        """
+        Gets the average ping returned by Uptime Kuma. When a user wants to see the average ping
+        across monitors, this tool is used.
+        :return: Average ping as dictionary
+        """
+        return get_average_ping()
+
+    @free_mcp.tool()
+    def get_uptime_kuma_info() -> dict:
+        """
+        Gets general information from the Uptime Kuma server instance.
+        :return: Information as dictionary
+        """
+        return get_server_info()
+
+    @free_mcp.tool()
+    def get_general_uptime_information() -> dict:
+        """
+        Gets overall uptime information from Uptime Kuma.
+        :return: Uptime information as dictionary
+        """
+        return get_general_uptime()
+
+    @free_mcp.tool()
+    def get_all_uptime_kuma_tags() -> list[dict]:
+        """
+        Gets all tags available in Uptime Kuma. When a user asks for all tags this tool should be used.
+        :return: List of tags as dictionaries
+        """
+        return get_all_tags()
+
+    @free_mcp.tool()
+    def get_specific_tag_by_id(id: int) -> dict:
+        """
+        Gets a specific tag if an id is provided. Use this tool when a user shares a tag id
+        to retrieve its full details.
+        :param id: Tag id as integer
+        :return: Tag as dictionary
+        """
+        return get_specific_tag(id)
+
+    @free_mcp.tool()
+    def get_uptime_kuma_settings() -> dict:
+        """
+        Gets the current Uptime Kuma settings.
+        :return: Settings as dictionary
+        """
+        return get_current_settings()
+
+    @free_mcp.tool()
+    def get_all_uptime_kuma_maintenances() -> list[dict]:
+        """
+        Gets all maintenance windows configured in Uptime Kuma. Use when a user wants to
+        review every maintenance slot.
+        :return: List of maintenances as dictionaries
+        """
+        return get_all_maintenances()
+
+
+    @free_mcp.tool()
+    def get_down_monitors() -> list[dict]:
+        """
+        Gets a list of all monitors that are currently in a 'down' state.
+        Provides a quick way to check for immediate problems.
+        :return: A list of monitor dictionaries that are currently down.
+        """
+        return get_down_monitors_service()
+
+    @free_mcp.tool()
+    def get_monitor_health_summary(id: int) -> dict:
+        """
+        Gets a combined health summary for a specific monitor, including
+        details, average ping, and uptime information.
+        :param id: The integer ID of the monitor.
+        :return: A dictionary containing the combined health summary.
+        """
+        return get_monitor_health_summary_service(id)
+
+    @free_mcp.tool()
+    def get_monitors_by_tag(tag: str) -> list[dict]:
+        """
+        Finds all monitors associated with a specific tag by searching
+        both tag names and tag values.
+        :param tag: The tag name or value to search for (case-insensitive).
+        :return: A list of monitor dictionaries that have the specified tag.
+        """
+        return get_monitors_by_tag_service(tag)
