@@ -7,6 +7,10 @@ This version is released under the BSL license. We do provide a hosted solution 
 functionality baked in to the closed source version. If you want the more advanced version,
 please contact us on hello (at) gryfai.com
 
+The repository is still active and we will add to it continously.
+We are painfully aware that we lack testing, but we have tested it with a couple of clients.
+It is all good to go! Writing tests is the next thing on our agenda.
+
 # The open version
 This version is exposing a limited but useful set of tools to interact with
 Uptime Kuma via your favorite LLM tool.
