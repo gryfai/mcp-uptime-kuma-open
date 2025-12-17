@@ -17,7 +17,6 @@ from services import (
     get_specific_tag,
     get_current_settings,
     get_all_maintenances,
-,
     get_down_monitors_service,
     get_monitor_health_summary_service,
     get_monitors_by_tag_service
