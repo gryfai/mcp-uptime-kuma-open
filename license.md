@@ -5,7 +5,7 @@
 | Parameter | Value |
 | :--- | :--- |
 | **Licensor** | **GryfAi** |
-| **Licensed Work** | **The entire contents of the `mcp-uptime-kuma-community` repository.** |
+| **Licensed Work** | **The entire contents of the `mcp-uptime-kuma-open` repository.** |
 | **Change Date** | **2029-01-01** (The license will convert to Apache 2.0 on this date) |
 | **Change License** | **Apache License, Version 2.0** |
 | **Additional Use Grant** | **See below for specific conditions.** |
