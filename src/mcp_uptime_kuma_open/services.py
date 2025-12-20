@@ -9,6 +9,11 @@ UPTIME_KUMA_URL = getenv("UPTIME_KUMA_URL", "http://localhost:3001")
 UPTIME_KUMA_USERNAME = getenv("UPTIME_KUMA_USERNAME", None)
 UPTIME_KUMA_PASSWORD = getenv("UPTIME_KUMA_PASSWORD", None)
 
+if not UPTIME_KUMA_USERNAME or not UPTIME_KUMA_PASSWORD:
+    raise ValueError(
+        "UPTIME_KUMA_USERNAME and UPTIME_KUMA_PASSWORD must be set in your environment."
+    )
+
 kuma_service = KumaService(
     UPTIME_KUMA_URL, UPTIME_KUMA_USERNAME, UPTIME_KUMA_PASSWORD
 )

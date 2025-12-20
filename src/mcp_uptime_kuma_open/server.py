@@ -1,9 +1,10 @@
 from fastmcp import FastMCP
-from tools import register_tools
+from .tools import register_tools # Changed to relative import
 
-free_mcp = FastMCP("Free Uptime Kuma MCP server")
-
-register_tools(free_mcp)
+def main():
+    free_mcp = FastMCP("Free Uptime Kuma MCP server")
+    register_tools(free_mcp)
+    free_mcp.run()
 
 if __name__ == '__main__':
-    free_mcp.run()
+    main()

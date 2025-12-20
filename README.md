@@ -46,6 +46,12 @@ It includes capabilities such as
 
 Just contact us at: hello (at) gryfai.com
 
+# Prerequisites
+This project uses `uv` as its build system. Please ensure you have either `uv` or `pip` installed. You can install `uv` with:
+```bash
+pip install uv
+```
+
 # Installation and usage (end users).
 Install locally, set env vars, then let your MCP client launch the STDIO server. You usually don’t need to run it manually unless debugging.
 
@@ -60,12 +66,13 @@ Install locally, set env vars, then let your MCP client launch the STDIO server.
 Client notes (all use STDIO; keys match current client docs):
 
 Gemini CLI
-- Add a server entry in your Gemini CLI MCP config (per current docs, `mcpServers` in `~/.config/gemini/cli.json`):
-```
+- Add a server entry in your Gemini CLI MCP config (`mcpServers` in `~/.gemini/settings.json`):
+```json
 {
   "mcpServers": {
     "uptime-kuma": {
-      "command": "python -m mcp_uptime_kuma_open.server"
+      "command": "python",
+      "args": ["-m", "mcp_uptime_kuma_open.server"]
     }
   }
 }
@@ -73,17 +80,18 @@ Gemini CLI
 - Restart or reload the CLI so it picks up the new server.
 
 Codex CLI
-- Add a STDIO server entry in your Codex config (current releases use `mcpServers` in `codex.yaml`):
-```
-mcpServers:
-  uptime-kuma:
-    command: ["python", "-m", "mcp_uptime_kuma_open.server"]
+- Add a STDIO server entry in your Codex config (`~/.codex/config.toml`):
+```toml
+[mcp_servers.uptime-kuma]
+command = "python"
+args = ["-m", "mcp_uptime_kuma_open.server"]
 ```
 - Save and restart the Codex CLI to load the server.
 
 Claude CLI
-- Add the MCP server to your Claude CLI config (current format: `mcpServers` in `~/.config/anthropic/claude/config.json`):
-```
+- Add the MCP server to your Claude CLI config (`~/.claude.json`). It is recommended to use the `claude mcp add` command.
+- If editing the file manually, add the following to the `mcpServers` object:
+```json
 {
   "mcpServers": {
     "uptime-kuma": {
@@ -95,12 +103,22 @@ Claude CLI
 - Run `claude` as normal; it will launch the STDIO server automatically.
 
 Claude Desktop
-- Open MCP settings and add a new STDIO server:
-  - Name: `uptime-kuma`
-  - Command: `python -m mcp_uptime_kuma_open.server`
-- Save, then re-open a conversation to activate the server.
+- The recommended way to add an MCP server is to install it as an extension (`.mcpb` file) or to edit the configuration file directly.
+- The configuration file is located at:
+  - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+  - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- If editing the file manually, add the following to the `mcpServers` object:
+```json
+{
+  "mcpServers": {
+    "uptime-kuma": {
+      "command": "python -m mcp_uptime_kuma_open.server"
+    }
+  }
+}
+```
+- After adding the server, you must restart the Claude Desktop application.
 
 We also offer a commercial HTTP/SSE version that can provide better performance. Feel free to use the open STDIO version under the provided license, or contact us if you prefer the hosted HTTP/SSE option.
 
-Please know that the installation instructions might change. Compare with the latest version of your client and adjust variables.
 We know that some clients sometimes behaves better if you run it straight in the venv.
