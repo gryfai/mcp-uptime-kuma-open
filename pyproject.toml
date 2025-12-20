@@ -1,7 +1,7 @@
 [project]
 name = "mcp-uptime-kuma-open"
 version = "0.1.0"
-description = "Add your description here"
+description = "Uptime Kuma Open MCP - Developed by GryfAi "
 readme = "README.md"
 authors = [
     { name = "cfossto", email = "70951673+cfossto@users.noreply.github.com" }
