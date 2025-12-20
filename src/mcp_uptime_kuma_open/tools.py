@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from services import (
+from .services import (
     get_all_monitors,
     get_specific_monitor,
     get_specific_monitor_beats,

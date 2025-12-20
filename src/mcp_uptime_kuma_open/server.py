@@ -1,5 +1,5 @@
 from fastmcp import FastMCP
-from .tools import register_tools # Changed to relative import
+from .tools import register_tools
 
 def main():
     free_mcp = FastMCP("Free Uptime Kuma MCP server")

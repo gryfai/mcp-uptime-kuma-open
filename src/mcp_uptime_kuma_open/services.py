@@ -1,4 +1,4 @@
-from uk_client import KumaService
+from .uk_client import KumaService
 from os import getenv
 from dotenv import load_dotenv
 from fastmcp.exceptions import ToolError
