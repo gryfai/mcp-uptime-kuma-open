@@ -55,18 +55,41 @@ pip install uv
 # Installation and usage (end users).
 Install locally, set env vars, then let your MCP client launch the STDIO server. You usually don’t need to run it manually unless debugging.
 
-1. Create and activate a virtual environment (Python 3.10+). When activated, `python` points to the venv interpreter.
+1. Create and activate a virtual environment (Python 3.10+).
+   - Check your Python version by running `python3 --version`. If you don't have Python 3.10 or newer, you can download it from the [official Python website](https://www.python.org/downloads/).
+   - To create a virtual environment, run the following command from the root of the project directory: `python3 -m venv .venv`
+   - To activate the virtual environment, run one of the following commands, depending on your operating system:
+     - Linux/macOS: `source .venv/bin/activate`
+     - Windows: `.venv\Scripts\activate`
+   - When the virtual environment is activated, your shell prompt will usually change to show the name of the virtual environment (e.g., `(.venv) user@host:...$`).
+
 2. Install the package inside that venv: `pip install .` (or `uv pip install .`).
+   - This command needs to be run from the root of the project directory.
+
 3. Configure environment variables for your Uptime Kuma instance:
    - `UPTIME_KUMA_URL` (default: `http://localhost:3001`)
    - `UPTIME_KUMA_USERNAME`
    - `UPTIME_KUMA_PASSWORD`
-4. Point your MCP client to the command `python -m mcp_uptime_kuma_open.server` (examples below). If your client runs outside the venv, give the full path to the venv’s python (e.g. `.venv/bin/python -m mcp_uptime_kuma_open.server`). The client will spawn it over STDIO.
+   - You can set these environment variables in your shell, or you can create a `.env` file in the root of the project directory and add them there. For example:
+     ```
+     UPTIME_KUMA_URL=http://localhost:3001
+     UPTIME_KUMA_USERNAME=my-username
+     UPTIME_KUMA_PASSWORD=my-password
+     ```
+   - **Note:** If you are using a `.env` file, the server will automatically load the environment variables from it.
+
+4. Point your MCP client to the command `python -m mcp_uptime_kuma_open.server` (examples below).
+   - If your MCP client is running in the same virtual environment, you can use the command `python -m mcp_uptime_kuma_open.server`.
+   - If your MCP client is running outside the virtual environment, you need to provide the full path to the Python executable in the virtual environment. You can find the full path by running the command `which python` (on Linux/macOS) or `where python` (on Windows) when the virtual environment is activated. For example: `.venv/bin/python -m mcp_uptime_kuma_open.server`.
+   - When using the `mcp add` command, make sure that the virtual environment is activated, or provide the full path to the Python executable.
 
 Client notes (all use STDIO; keys match current client docs):
 
 Gemini CLI
-- Add a server entry in your Gemini CLI MCP config (`mcpServers` in `~/.gemini/settings.json`):
+- The recommended way to add the server is to run the following command:
+  `gemini mcp add uptime-kuma python -m mcp_uptime_kuma_open.server`
+- Restart or reload the CLI so it picks up the new server.
+- Alternatively, you can add a server entry in your Gemini CLI MCP config (`mcpServers` in `~/.gemini/settings.json`):
 ```json
 {
   "mcpServers": {
@@ -77,10 +100,12 @@ Gemini CLI
   }
 }
 ```
-- Restart or reload the CLI so it picks up the new server.
 
 Codex CLI
-- Add a STDIO server entry in your Codex config (`~/.codex/config.toml`):
+- The recommended way to add the server is to run the following command:
+  `codex mcp add uptime-kuma python -m mcp_uptime_kuma_open.server`
+- Restart or reload the CLI so it picks up the new server.
+- Alternatively, you can add a STDIO server entry in your Codex config (`~/.codex/config.toml`):
 ```toml
 [mcp_servers.uptime-kuma]
 command = "python"
