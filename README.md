@@ -137,7 +137,8 @@ Claude Desktop
 {
   "mcpServers": {
     "uptime-kuma": {
-      "command": "python -m mcp_uptime_kuma_open.server"
+      "command": "<path-to-root-folder-of-project>/mcp-uptime-kuma-open/.venv/bin/python",
+      "args": ["-m", "mcp_uptime_kuma_open.server"]
     }
   }
 }
