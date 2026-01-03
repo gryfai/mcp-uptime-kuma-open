@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/gryfai/mcp-uptime-kuma-open/actions/workflows/build.yml/badge.svg)](https://github.com/gryfai/mcp-uptime-kuma-open/actions/workflows/build.yml)
+
 # mcp-uptime-kuma-open
 
 This is the open version of our Uptime Kuma MCP server.
