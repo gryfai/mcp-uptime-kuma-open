@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+name: Build
 
 on:
   push:
@@ -29,9 +29,10 @@ jobs:
     - name: Install dependencies
     # uv sync installs the locked dependencies from uv.lock
       run: uv sync --all-extras --dev
-    - name: Run tests
-      # run pytest through uv to ensure it uses the virtual environment
-      run: uv run pytest
-      env:
-        UPTIME_KUMA_PASSWORD: dummy
-        UPTIME_KUMA_USERNAME: dummyuser
+    - name: Test installation
+      run: |
+        uv venv test_env
+        source test_env/bin/activate
+        uv pip install .
+    - name: Test build
+      run: uv build
