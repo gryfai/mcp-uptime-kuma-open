@@ -32,3 +32,6 @@ jobs:
     - name: Run tests
       # run pytest through uv to ensure it uses the virtual environment
       run: uv run pytest
+      env:
+        UPTIME_KUMA_PASSWORD: dummy
+        UPTIME_KUMA_USERNAME: dummyuser
